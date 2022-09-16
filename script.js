@@ -1,6 +1,6 @@
 const cell = document.querySelectorAll("[data-cell]");
 const board = document.getElementById("board");
-const restart = document.getElementById("restartButton");
+const restart = document.getElementById("restart");
 const RED_CIRCLE = "circle";
 const YELLOW_CIRCLE = "circle";
 
