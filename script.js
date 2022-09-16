@@ -21,7 +21,10 @@ let yellowTurn;
 
 startGame();
 
-restart.addEventListener("click", startGame);
+restart.addEventListener("click", () => {
+  startGame();
+  message.innerHTML = "";
+});
 
 function startGame() {
   yellowTurn = false;
@@ -54,6 +57,7 @@ function endGame(draw) {
   } else {
     message.innerHTML = `${yellowTurn ? "Yellow" : "Red"} Wins`;
   }
+  BoardCell.classList.display = "none";
 }
 
 function isDraw() {
