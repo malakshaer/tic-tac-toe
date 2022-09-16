@@ -1,10 +1,12 @@
-const cell = document.querySelectorAll("[data-cell]");
+const BoardCell = document.querySelectorAll("[data-cell]");
 const board = document.getElementById("board");
 const restart = document.getElementById("restart");
-const RED_CIRCLE = "circle";
-const YELLOW_CIRCLE = "circle";
+const message = document.getElementById("message");
 
-const WINNING_COMBINATIONS = [
+const RED_CIRCLE = "R";
+const YELLOW_CIRCLE = "Y";
+
+const WINNING_WAYS = [
   [0, 1, 2],
   [3, 4, 5],
   [6, 7, 8],
@@ -15,23 +17,24 @@ const WINNING_COMBINATIONS = [
   [2, 4, 6],
 ];
 
-let yellowTurn = true;
+let yellowTurn;
+
 startGame();
 
 restart.addEventListener("click", startGame);
 
-startGame = function () {
-  circleTurn = false;
-  cell.forEach((cell) => {
+function startGame() {
+  yellowTurn = false;
+  BoardCell.forEach((cell) => {
     cell.classList.remove(RED_CIRCLE);
     cell.classList.remove(YELLOW_CIRCLE);
     cell.removeEventListener("click", handleClick);
     cell.addEventListener("click", handleClick, { once: true });
   });
-  setBoardHover();
-};
+  hover();
+}
 
-handleClick = function (e) {
+function handleClick(e) {
   const cell = e.target;
   const current = yellowTurn ? YELLOW_CIRCLE : RED_CIRCLE;
   placeMark(cell, current);
@@ -40,7 +43,50 @@ handleClick = function (e) {
   } else if (isDraw()) {
     endGame(true);
   } else {
-    swapTurns();
-    setBoardHover();
+    swap();
+    hover();
   }
-};
+}
+
+function endGame(draw) {
+  if (draw) {
+    message.innerHTML = "Draw";
+  } else {
+    message.innerHTML = `${yellowTurn ? "Yellow" : "Red"} Wins`;
+  }
+}
+
+function isDraw() {
+  return [...BoardCell].every((cell) => {
+    return (
+      cell.classList.contains(RED_CIRCLE) ||
+      cell.classList.contains(YELLOW_CIRCLE)
+    );
+  });
+}
+
+function placeMark(cell, current) {
+  cell.classList.add(current);
+}
+
+function swap() {
+  yellowTurn = !yellowTurn;
+}
+
+function hover() {
+  board.classList.remove(RED_CIRCLE);
+  board.classList.remove(YELLOW_CIRCLE);
+  if (yellowTurn) {
+    board.classList.add(YELLOW_CIRCLE);
+  } else {
+    board.classList.add(RED_CIRCLE);
+  }
+}
+
+function checkWin(current) {
+  return WINNING_WAYS.some((combination) => {
+    return combination.every((index) => {
+      return BoardCell[index].classList.contains(current);
+    });
+  });
+}

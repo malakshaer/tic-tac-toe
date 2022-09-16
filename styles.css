@@ -52,63 +52,15 @@ body{
   border-bottom: none;
 }
 
-.cell.x,
-.cell.circle {
-  cursor: not-allowed;
+.cell.R::before,
+.board.R .cell:not(.R):not(.Y):hover {
+  content: url(/Images/red.png);
 }
 
-.cell.x::before,
-.cell.x::after,
-.cell.circle::before {
-  background-color: black;
-}
-
-.board.x .cell:not(.x):not(.circle):hover::before,
-.board.x .cell:not(.x):not(.circle):hover::after,
-.board.circle .cell:not(.x):not(.circle):hover::before {
-  background-color: rgb(236, 84, 211);
-}
-
-.cell.x::before,
-.cell.x::after,
-.board.x .cell:not(.x):not(.circle):hover::before,
-.board.x .cell:not(.x):not(.circle):hover::after {
-  content: "";
-  position: absolute;
-  width: 20px;
-  height: 130px;
-}
-
-.cell.x::before, 
-.board.x .cell:not(.x):not(.click):hover::after{
-    transform: rotate(45deg);
-}
-
-.cell.x::after,
-.board.x .cell:not(.x):not(.circle):hover::after {
-  transform: rotate(-45deg);
-}
-
-.cell.circle::before,
-.cell.circle::after,
-.board.circle .cell:not(.x):not(.circle):hover::before,
-.board.circle .cell:not(.x):not(.circle):hover::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-}
-
-.cell.circle::before,
-.board.circle .cell:not(.x):not(.circle):hover::before {
-  width: 130px;
-  height: 130px;
-}
-
-.cell.circle::after,
-.board.circle .cell:not(.x):not(.circle):hover::after {
-  width: 90px;
-  height: 90px;
-  background-color: rgb(247, 246, 246);
+.cell.Y::before,
+.board.Y .cell:not(.R):not(.Y):hover {
+  content: url(/Images/yellow.png);
+  
 }
 
 button{
