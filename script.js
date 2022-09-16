@@ -18,6 +18,7 @@ const WINNING_WAYS = [
 ];
 
 let yellowTurn;
+let score = 0;
 
 startGame();
 
@@ -53,11 +54,14 @@ function handleClick(e) {
 
 function endGame(draw) {
   if (draw) {
-    message.innerHTML = "Draw";
+    score = 5;
+    message.innerHTML = `Draw and scored: ${score}`;
   } else {
-    message.innerHTML = `${yellowTurn ? "Yellow" : "Red"} Wins`;
+    score = 10;
+    message.innerHTML = `${
+      yellowTurn ? "Yellow" : "Red"
+    } Wins and scored: ${score}`;
   }
-  BoardCell.classList.display = "none";
 }
 
 function isDraw() {
